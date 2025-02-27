@@ -10,26 +10,7 @@ import { RepresentativeResults } from "@/components/RepresentativeResults";
 <Layout>
     <div class="container mx-auto px-4 py-8">
         <header class="flex justify-end gap-4 mb-8">
-            <a href="#" class="text-red-600 flex items-center gap-1">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    class="lucide lucide-home"
-                >
-                    <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
-                    ></path>
-                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                </svg>
-                Home
-            </a>
-            <a href="#" class="text-red-600 flex items-center gap-1">
+            <a href="#readme" class="text-red-600 flex items-center gap-1">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -68,7 +49,7 @@ import { RepresentativeResults } from "@/components/RepresentativeResults";
             <RepresentativeResults client:load />
         </main>
 
-        <footer class="mt-8 text-center text-gray-600 text-sm">
+        <footer class="mt-8 text-center text-gray-600 text-sm" id="readme">
             <p>
                 Note: Data comes from the{" "}
                 <a
