@@ -1,0 +1,20 @@
+---
+import { RepresentativeResults } from "@/components/RepresentativeResults";
+import { openStatesClient, encodeJurisdiction } from "@/lib/openstates-client";
+
+type Props = {
+    state: string;
+};
+
+const { state } = Astro.props;
+
+const { data } = await openStatesClient.GET("/people", {
+    params: {
+        query: {
+            jurisdiction: encodeJurisdiction({ state }),
+        },
+    },
+});
+---
+
+<RepresentativeResults data={data?.results} />

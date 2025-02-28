@@ -1,0 +1,22 @@
+---
+import City from "@/components/City.astro";
+import Layout from "../layouts/Layout.astro";
+import { RepresentativeResults } from "@/components/RepresentativeResults";
+import State from "@/components/State.astro";
+import Country from "@/components/Country.astro";
+
+export const prerender = false;
+
+const location = Astro.params.location;
+if (!location) throw new Error("Location parameter is missing");
+
+const [state, city] = location.split(":");
+---
+
+<Layout>
+    <div class="max-w-4xl mx-auto">
+        <City server:defer state={state} city={city} />
+        <State server:defer state={state} />
+        <Country server:defer />
+    </div>
+</Layout>

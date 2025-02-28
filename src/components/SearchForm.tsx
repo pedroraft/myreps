@@ -1,29 +1,21 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Locate, Search } from "lucide-react";
+import { Search } from "lucide-react";
+import { parseLocation } from "parse-address";
 import type React from "react";
 import { useState } from "react";
 
 export function SearchForm() {
   const [address, setAddress] = useState("");
-  const [filters, setFilters] = useState({
-    local: true,
-    county: true,
-    state: true,
-    federal: true,
-  });
-
-  const handleFilterChange = (key: keyof typeof filters) => {
-    setFilters((prev) => ({
-      ...prev,
-      [key]: !prev[key],
-    }));
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real application, this would trigger an API call
-    console.log("Searching for:", address, "with filters:", filters);
+    try {
+      const { state, city } = parseLocation(address);
+      location.href = `/${state}:${city}`;
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -37,25 +29,27 @@ export function SearchForm() {
             onChange={(e) => setAddress(e.target.value)}
             className="flex-grow"
           />
-          {typeof navigator !== "undefined" && navigator.geolocation && (
-            <div className="flex gap-2">
-              <Button type="submit">
-                <Search />
-                Search
-              </Button>
-              <Button
-                type="button"
-                variant="outline"
-                className="flex items-center gap-2"
-                onClick={() =>
-                  navigator.geolocation.getCurrentPosition(console.log)
-                }
-              >
-                <Locate />
-                Find me
-              </Button>
-            </div>
-          )}
+          <div className="flex gap-2">
+            <Button type="submit" data-umami-event="Search">
+              <Search />
+              Search
+            </Button>
+            {/* <Button
+              type="button"
+              variant="outline"
+              className="flex items-center gap-2"
+              onClick={() =>
+                navigator.geolocation.getCurrentPosition(console.log)
+              }
+              data-umami-event="Find me"
+              disabled={
+                typeof navigator === "undefined" || !navigator.geolocation
+              }
+            >
+              <Locate />
+              Find me
+            </Button> */}
+          </div>
         </div>
       </form>
     </div>

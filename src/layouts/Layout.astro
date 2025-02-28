@@ -1,5 +1,7 @@
 ---
+import { SearchForm } from "@/components/SearchForm";
 import "@/styles/global.css";
+import { Info } from "lucide-react";
 ---
 
 <!doctype html>
@@ -17,6 +19,38 @@ import "@/styles/global.css";
             data-website-id="5225a920-8c86-4d2d-bc3a-3750e533cb95"></script>
     </head>
     <body>
-        <slot />
+        <div class="container mx-auto px-4 py-8">
+            <header class="flex justify-end gap-4 mb-8">
+                <a href="#readme" class="flex items-center gap-1">
+                    <Info size={22} />
+                    About
+                </a>
+            </header>
+
+            <main>
+                <h1 class="text-5xl font-bold text-center text-gray-800 mb-8">
+                    My Reps
+                </h1>
+
+                <div class="mb-12">
+                    <p class="text-xl text-center mb-6">
+                        Enter your address to <span class="font-medium"
+                            >find and contact</span
+                        > your federal, state, county and local elected representatives
+                    </p>
+
+                    <SearchForm client:only="react" />
+                </div>
+
+                <slot />
+            </main>
+
+            <footer class="mt-8 text-center text-gray-600 text-sm" id="readme">
+                <p>
+                    Note: Data comes from the{" "}
+                    <a href="https://docs.openstates.org/"> Open States API.</a>
+                </p>
+            </footer>
+        </div>
     </body>
 </html>
