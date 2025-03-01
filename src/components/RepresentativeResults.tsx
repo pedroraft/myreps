@@ -103,7 +103,7 @@ export function RepresentativeResults({
                   <td className="py-4 px-4">
                     <div className="flex gap-2">
                       {official.urls
-                        ?.filter((url) => url.includes("wikipedia.org"))
+                        ?.filter((url) => !url.includes("wikipedia.org"))
                         .map((url, i) => (
                           <a
                             key={i}
