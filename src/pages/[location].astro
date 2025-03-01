@@ -1,22 +1,25 @@
 ---
-import City from "@/components/City.astro";
 import Layout from "../layouts/Layout.astro";
 import { RepresentativeResults } from "@/components/RepresentativeResults";
-import State from "@/components/State.astro";
-import Country from "@/components/Country.astro";
+import { getRepresentatives } from "@/lib/google-civic";
+import { parseLocation } from "parse-address";
 
+const address = Astro.params.location;
 export const prerender = false;
 
-const location = Astro.params.location;
-if (!location) throw new Error("Location parameter is missing");
+// cheaty but prevents abuse
+if (!address || address.length < 10)
+    throw new Error("Location parameter is missing");
+const parsedAddress = parseLocation(address);
+if (!parsedAddress.city || !parsedAddress.state) {
+    throw new Error("Invalid location parameter");
+}
 
-const [state, city] = location.split(":");
+const data = await getRepresentatives(address);
 ---
 
 <Layout>
     <div class="max-w-4xl mx-auto">
-        <City server:defer state={state} city={city} />
-        <State server:defer state={state} />
-        <Country server:defer />
+        <RepresentativeResults data={data} client:idle />
     </div>
 </Layout>

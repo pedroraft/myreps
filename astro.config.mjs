@@ -27,6 +27,14 @@ export default defineConfig({
         context: "server",
         access: "secret",
       }),
+      PUBLIC_MAPBOX_TOKEN: envField.string({
+        context: "client",
+        access: "public",
+      }),
+      GOOGLE_CIVIC_API_KEY: envField.string({
+        context: "server",
+        access: "secret",
+      }),
     },
   },
 });

@@ -24,3 +24,6 @@ pnpm-debug.log*
 .idea/
 .vercel
 people
+data
+.env*.local
+test.json

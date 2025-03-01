@@ -10,23 +10,16 @@ import { Info } from "lucide-react";
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="generator" content={Astro.generator} />
         <title>My Reps | Contact your representatives</title>
         <script
             defer
             is:inline
             src="https://cloud.umami.is/script.js"
+            data-domains="myreps.org"
             data-website-id="5225a920-8c86-4d2d-bc3a-3750e533cb95"></script>
     </head>
     <body>
         <div class="container mx-auto px-4 py-8">
-            <header class="flex justify-end gap-4 mb-8">
-                <a href="#readme" class="flex items-center gap-1">
-                    <Info size={22} />
-                    About
-                </a>
-            </header>
-
             <main>
                 <h1 class="text-5xl font-bold text-center text-gray-800 mb-8">
                     My Reps
@@ -36,7 +29,7 @@ import { Info } from "lucide-react";
                     <p class="text-xl text-center mb-6">
                         Enter your address to <span class="font-medium"
                             >find and contact</span
-                        > your federal, state, county and local elected representatives
+                        > elected representatives
                     </p>
 
                     <SearchForm client:only="react" />
@@ -44,13 +37,11 @@ import { Info } from "lucide-react";
 
                 <slot />
             </main>
-
-            <footer class="mt-8 text-center text-gray-600 text-sm" id="readme">
-                <p>
-                    Note: Data comes from the{" "}
-                    <a href="https://docs.openstates.org/"> Open States API.</a>
-                </p>
-            </footer>
         </div>
     </body>
 </html>
+
+<script>
+    if (window.location.host !== "myreps.org")
+        localStorage.setItem("umami.disabled", "1");
+</script>
