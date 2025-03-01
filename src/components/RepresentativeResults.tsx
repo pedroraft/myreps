@@ -48,13 +48,13 @@ export function RepresentativeResults({
                 Office
               </div>
             </th>
-            <th className="text-left py-2 px-4 font-medium">
+            <th className="text-left py-2 px-4 font-medium hidden lg:table-cell">
               <div className="flex items-center gap-2">
                 <MapPin size={22} />
                 Address
               </div>
             </th>
-            <th className="text-left py-2 px-4 font-medium">
+            <th className="text-left py-2 px-4 font-medium hidden lg:table-cell">
               <div className="flex items-center gap-2">
                 <Link size={22} />
                 Links
@@ -93,14 +93,14 @@ export function RepresentativeResults({
                     </div>
                   </td>
                   <td className="py-4 px-4">{official?.office?.name}</td>
-                  <td className="py-4 px-4">
+                  <td className="py-4 px-4 hidden lg:table-cell">
                     {official.address?.map((addr, i) => (
                       <div key={i}>
                         {addr.line1}, {addr.city}, {addr.state} {addr.zip}
                       </div>
                     ))}
                   </td>
-                  <td className="py-4 px-4">
+                  <td className="py-4 px-4 hidden lg:table-cell">
                     <div className="flex gap-2">
                       {official.urls
                         ?.filter((url) => !url.includes("wikipedia.org"))

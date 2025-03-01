@@ -10,7 +10,6 @@
     "types": "npx openapi-typescript https://v3.openstates.org/openapi.json -o ./src/lib/openstates.ts"
   },
   "dependencies": {
-    "@amraneze/osm-autocomplete": "^0.0.7-beta",
     "@astrojs/react": "^4.2.1",
     "@astrojs/vercel": "^8.1.0",
     "@mapbox/search-js-react": "^1.0.0",
@@ -32,6 +31,7 @@
     "parse-address": "^1.1.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-select": "^5.10.0",
     "tailwind-merge": "^3.0.2",
     "tailwindcss": "^4.0.9",
     "tailwindcss-animate": "^1.0.7"

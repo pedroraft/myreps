@@ -1,7 +1,7 @@
 ---
+import { ManualSearchForm } from "@/components/ManualSearchForm";
 import { SearchForm } from "@/components/SearchForm";
 import "@/styles/global.css";
-import { Info } from "lucide-react";
 ---
 
 <!doctype html>
@@ -32,6 +32,7 @@ import { Info } from "lucide-react";
                         > elected representatives
                     </p>
 
+                    <!-- <ManualSearchForm client:only="react" /> -->
                     <SearchForm client:only="react" />
                 </div>
 
