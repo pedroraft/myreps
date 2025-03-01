@@ -10,10 +10,10 @@ export const prerender = false;
 // cheaty but prevents abuse
 if (!address || address.length < 10)
     throw new Error("Location parameter is missing");
-const parsedAddress = parseLocation(address);
-if (!parsedAddress.city || !parsedAddress.state) {
-    throw new Error("Invalid location parameter");
-}
+// const parsedAddress = parseLocation(address);
+// if (!parsedAddress.city || !parsedAddress.state) {
+//     throw new Error("Invalid location parameter");
+// }
 
 const data = await getRepresentatives(address);
 ---
