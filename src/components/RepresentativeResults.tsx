@@ -41,26 +41,28 @@ export function RepresentativeResults({
       <table className="w-full">
         <thead>
           <tr className="border-b">
-            <th className="text-left py-2 px-4 font-medium">Representative</th>
-            <th className="text-left py-2 px-4 font-medium">
+            <th className="text-left py-2 px-1 sm:px-4 font-medium">
+              Representative
+            </th>
+            <th className="text-left py-2 px-1 sm:px-4 font-medium">
               <div className="flex items-center gap-2">
                 <Building size={22} />
                 Office
               </div>
             </th>
-            <th className="text-left py-2 px-4 font-medium hidden lg:table-cell">
+            <th className="text-left py-2 px-1 sm:px-4 font-medium hidden lg:table-cell">
               <div className="flex items-center gap-2">
                 <MapPin size={22} />
                 Address
               </div>
             </th>
-            <th className="text-left py-2 px-4 font-medium hidden lg:table-cell">
+            <th className="text-left py-2 px-1 sm:px-4 font-medium hidden lg:table-cell">
               <div className="flex items-center gap-2">
                 <Link size={22} />
                 Links
               </div>
             </th>
-            <th className="text-right py-2 px-4"></th>
+            <th className="text-right py-2 px-1 sm:px-4"></th>
           </tr>
         </thead>
         <tbody>
@@ -68,9 +70,9 @@ export function RepresentativeResults({
             data.map((official, index) => {
               return (
                 <tr key={index} className="border-b">
-                  <td className="py-4 px-4">
+                  <td className="py-4 px-1 sm:px-4">
                     <div className="flex items-center gap-4">
-                      <Avatar className="h-12 w-12 bg-gray-200">
+                      <Avatar className="h-12 w-12 bg-gray-200 hidden md:table-cell">
                         <AvatarImage
                           src={official?.photoUrl}
                           className="h-full w-full object-cover"
@@ -92,15 +94,17 @@ export function RepresentativeResults({
                       </div>
                     </div>
                   </td>
-                  <td className="py-4 px-4">{official?.office?.name}</td>
-                  <td className="py-4 px-4 hidden lg:table-cell">
+                  <td className="py-4 px-1 sm:px-4">
+                    {official?.office?.name}
+                  </td>
+                  <td className="py-4 px-1 sm:px-4 hidden lg:table-cell">
                     {official.address?.map((addr, i) => (
                       <div key={i}>
                         {addr.line1}, {addr.city}, {addr.state} {addr.zip}
                       </div>
                     ))}
                   </td>
-                  <td className="py-4 px-4 hidden lg:table-cell">
+                  <td className="py-4 px-1 md:px-4 hidden lg:table-cell">
                     <div className="flex gap-2">
                       {official.urls
                         ?.filter((url) => !url.includes("wikipedia.org"))
@@ -166,10 +170,10 @@ export function RepresentativeResults({
                       })}
                     </div>
                   </td>
-                  <td className="py-4 px-4 text-right">
+                  <td className="py-4 px-1 sm:px-4 text-right">
                     <Button onClick={() => setSelectedRepresentative(official)}>
                       Contact
-                      <ChevronRight size={18} />
+                      <ChevronRight size={18} className="hidden md:block" />
                     </Button>
                   </td>
                 </tr>
@@ -177,7 +181,10 @@ export function RepresentativeResults({
             })
           ) : (
             <tr>
-              <td colSpan={5} className="py-4 px-4 text-center text-gray-500">
+              <td
+                colSpan={5}
+                className="py-4 px-1 sm:px-4 text-center text-gray-500"
+              >
                 No representatives found for this level of government.
               </td>
             </tr>
