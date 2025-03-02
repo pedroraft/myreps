@@ -118,7 +118,7 @@ export function ContactDialog({
 
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
-      <AlertDialogContent className="max-w-2xl">
+      <AlertDialogContent className="max-w-full md:max-w-2xl">
         <AlertDialogHeader>
           <AlertDialogTitle>Contact {representative.name}</AlertDialogTitle>
           <AlertDialogDescription>
@@ -126,7 +126,7 @@ export function ContactDialog({
           </AlertDialogDescription>
         </AlertDialogHeader>
         <div className="my-4">
-          <div className="flex space-x-2 mb-4">
+          <div className="flex flex-wrap space-y-2 space-x-2 mb-4">
             {Object.keys(contactMethodsGrouped).map((type) => (
               <Button
                 key={type}
