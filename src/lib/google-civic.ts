@@ -24,7 +24,7 @@ interface Division {
   officeIndices?: number[];
 }
 
-interface Office {
+export interface Office {
   name: string;
   divisionId: string;
   levels?: string[];
@@ -40,7 +40,7 @@ interface Source {
 
 interface Official {
   name: string;
-  address?: Address[];
+  address?: Address[] | string[];
   party?: string;
   phones?: string[];
   urls?: string[];

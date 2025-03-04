@@ -27,3 +27,4 @@ people
 data
 .env*.local
 test.json
+test2.json

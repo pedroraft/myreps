@@ -1,6 +1,7 @@
 import type { paths } from "@/lib/openstates";
 import { OPENSTATES_API_KEY } from "astro:env/server";
 import createClient from "openapi-fetch";
+import type { Office, OfficialWithOffice } from "./google-civic";
 
 export const openStatesClient = createClient<paths>({
   baseUrl: "https://v3.openstates.org/",
@@ -8,6 +9,48 @@ export const openStatesClient = createClient<paths>({
     "X-API-Key": OPENSTATES_API_KEY,
   },
 });
+
+export const fallbackRepresentatives = async ({
+  lat,
+  lng,
+}: {
+  lat: number;
+  lng: number;
+}): Promise<OfficialWithOffice[]> => {
+  const { data } = await openStatesClient.GET("/people.geo", {
+    params: {
+      query: {
+        lng,
+        lat,
+        include: ["links", "offices"],
+      },
+    },
+  });
+
+  const results = data?.results
+    ?.reduce((arr, official, index) => {
+      if (!official?.offices?.[0]) return arr;
+
+      const office = {
+        name: official?.current_role?.title || "Unknown",
+      } as Office;
+      return [
+        ...arr,
+        {
+          ...official,
+          office,
+          address: official?.offices
+            ?.map((o) => o?.address || "")
+            .filter(Boolean),
+          urls: official?.links?.map((l) => l?.url || "").filter(Boolean),
+          phones: official?.offices?.map((o) => o?.voice || "").filter(Boolean),
+        },
+      ];
+    }, [] as OfficialWithOffice[])
+    .sort((a, b) => a?.office.name.localeCompare(b?.office.name));
+
+  return results as any;
+};
 
 // ocd-jurisdiction/country:us/state:tx/place:houston/government
 export const encodeJurisdiction = ({

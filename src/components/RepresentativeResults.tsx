@@ -98,11 +98,16 @@ export function RepresentativeResults({
                     {official?.office?.name}
                   </td>
                   <td className="py-4 px-1 sm:px-4 hidden lg:table-cell">
-                    {official.address?.map((addr, i) => (
-                      <div key={i}>
-                        {addr.line1}, {addr.city}, {addr.state} {addr.zip}
+                    {typeof official.address?.[0] === "string" ? (
+                      <div>{official.address?.[0]}</div>
+                    ) : (
+                      <div>
+                        {official.address?.[0].line1},{" "}
+                        {official.address?.[0].city},{" "}
+                        {official.address?.[0].state}{" "}
+                        {official.address?.[0].zip}
                       </div>
-                    ))}
+                    )}
                   </td>
                   <td className="py-4 px-1 md:px-4 hidden lg:table-cell">
                     <div className="flex gap-2">

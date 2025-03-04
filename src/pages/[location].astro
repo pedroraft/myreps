@@ -2,20 +2,27 @@
 import Layout from "../layouts/Layout.astro";
 import { RepresentativeResults } from "@/components/RepresentativeResults";
 import { getRepresentatives } from "@/lib/google-civic";
+import { fallbackRepresentatives } from "@/lib/openstates-client";
 import { parseLocation } from "parse-address";
 
-const address = Astro.params.location;
-export const prerender = false;
+const path = Astro.params.location;
+const [address, latitude, longitude] = (path || "").split(":");
 
 // cheaty but prevents abuse
 if (!address || address.length < 10)
     throw new Error("Location parameter is missing");
+export const prerender = false;
+
 // const parsedAddress = parseLocation(address);
 // if (!parsedAddress.city || !parsedAddress.state) {
 //     throw new Error("Invalid location parameter");
 // }
 
-const data = await getRepresentatives(address);
+// const data = await getRepresentatives(address);
+const data = await fallbackRepresentatives({
+    lat: 45.53065,
+    lng: -124.917617,
+});
 ---
 
 <Layout>

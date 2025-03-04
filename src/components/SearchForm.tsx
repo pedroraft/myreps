@@ -21,8 +21,12 @@ export function SearchForm() {
             types: "",
           }}
           onRetrieve={(address) => {
+            const latitude =
+              address.features?.[0]?.properties?.coordinates?.latitude;
+            const longitude =
+              address.features?.[0]?.properties?.coordinates?.longitude;
             location.replace(
-              `/${address?.features?.[0]?.properties?.full_address}`,
+              `/${address?.features?.[0]?.properties?.full_address?.replace(", United States", "")}:${latitude}:${longitude}`,
             );
           }}
           placeholder={
